@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVOLUTION-MD1 Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 100px 0;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .bot-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .bot-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Updated stats container styles */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            width: 100%;
+            min-width: 0; /* Prevents overflow */
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 1.8rem; /* Reduced size */
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            word-wrap: break-word; /* Ensures long text wraps */
+            overflow-wrap: break-word;
+        }
+
+        .stat-title {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .features-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            text-align: center; /* Center all content */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center horizontally */
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .developer-section {
+            padding: 80px 0;
+        }
+
+        .developer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .developer-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .developer-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .developer-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .developer-card a:hover .developer-name {
+            color: var(--primary);
+        }
+
+        .developer-card a:hover .developer-role {
+            opacity: 0.9;
+        }
+
+        .developer-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            overflow: hidden;
+        }
+
+        .developer-avatar img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .developer-name {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .developer-role {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .scroll-to-top img {
+            width: 24px;
+            height: 24px;
+            filter: invert(1); 
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Updated responsive styles */
+        @media (max-width: 768px) {
+            .bot-title {
+                font-size: 2.5rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+                padding: 20px 10px;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr; /* 1 column on mobile */
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        .feature-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header data-aos="fade-down">
+        <div class="container">
+            <h1 class="bot-title">DEVOLUTION-MD1</h1>
+            <p class="bot-subtitle">Bot WhatsApp Untuk Memudahkan Segala Aktivitas Anda Atau Bahkan Bisa Menjadi Mesin Pencari Yang Bisa Di Andalkan</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="stats-container">
+            <div class="stat-card" data-aos="fade-up">
+                <div class="stat-number">1.0.4</div>
+                <div class="stat-title">New Version</div>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-number">@whiskeysockets/baileys</div>
+                <div class="stat-title">Using Baileys</div>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-number">100+</div>
+                <div class="stat-title">Total Features</div>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-number">120</div>
+                <div class="stat-title">Active Users</div>
+            </div>
+</div>
+
+        <!-- Features Section -->
+        <section class="features-section" data-aos="fade-up">
+            <h2 class="section-title">Fitur Utama</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <img src="https://img.icons8.com/ios/50/000000/chat.png" alt="Chat Feature">
+                    </div>
+                    <h3 class="feature-title">Chat Commands</h3>
+                    <p>Menambah interaksi lebih cepat dengan perintah chat yang dapat disesuaikan.</p>
+                </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMjJzOC02LjUtOC0xMlY0bDgtNCB2NmMwIDUuNS04IDEyLTggMTJ6Ii8+PC9zdmc+" alt="Security Icon">
+            </div>
+            <h3 class="feature-title">Advanced Security</h3>
+            <p>Keamanan Yang Terjamin, Kami Sudah Menggunkan Metode End-to-End Untuk Melindungi Privasi Anda.</p>
+        </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                      <a href="https://chat.whatsapp.com/BkEvRBueF1NIAdxXJX14fU" target="_blank">
+                        <img src="https://files.catbox.moe/2d6xa3.jpg" alt="Automation Feature">
+                      </a>
+                    </div>
+                    <h3 class="feature-title">Group Links</h3>
+                    <p>Gabung Ke Group Dengan Mengeclick ini Agar Bisa Report Eror, Request Feature, Dan Bocoran Update..</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developer Section -->
+<section class="developer-section" data-aos="fade-up">
+    <h2 class="section-title">Our Developers</h2>
+    <div class="developer-grid">
+        <!-- Developer 1 -->
+        <div class="developer-card" data-aos="fade-up" data-aos-delay="100">
+            <a href="https://github.com/DEVOLUTION-BOT" target="_blank">
+                <div class="developer-avatar">
+                    <img src="https://files.catbox.moe/jr6wp1.jpg" alt="Selxyz Avatar">
+                </div>
+                <div class="developer-name">Selxyz</div>
+                <div class="developer-role">Leader / CEO</div>
+            </a>
+        </div>
+
+        <!-- Developer 2 -->
+        <div class="developer-card" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://github.com/riooxdzzz" target="_blank">
+                <div class="developer-avatar">
+                    <img src="https://pomf2.lain.la/f/d3l8zx17.jpg" alt="Rioo Avatar">
+                </div>
+                <div class="developer-name">Rioo</div>
+                <div class="developer-role">API Manager</div>
+            </a>
+        </div>
+
+        <!-- Developer 3 -->
+        <div class="developer-card" data-aos="fade-up" data-aos-delay="300">
+            <a href="https://github.com/Anira-kawai" target="_blank">
+                <div class="developer-avatar">
+                    <img src="https://files.catbox.moe/33euzn.jpg" alt="Vano Avatar">
+                </div>
+                <div class="developer-name">Vano</div>
+                <div class="developer-role">Leader API Manager</div>
+            </a>
+        </div>
+                <!-- Developer 4 -->
+        <div class="developer-card" data-aos="fade-up" data-aos-delay="300">
+            <a href="https://github.com/SanzNewbie" target="_blank">
+                <div class="developer-avatar">
+                    <img src="https://files.catbox.moe/0fwp8a.jpg" alt="Sanzz Avatar">
+                </div>
+                <div class="developer-name">Sanzz</div>
+                <div class="developer-role">Api Manager</div>
+            </a>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <img src="https://img.icons8.com/ios/50/000000/arrow.png" alt="Scroll to Top">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS for animations
+        AOS.init({
+          duration: 2000,
+          once: true
+        });
+
+        // Scroll to top button functionality
+        const scrollToTopButton = document.getElementById('scrollToTop');
+        window.onscroll = function () {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollToTopButton.classList.add('visible');
+            } else {
+                scrollToTopButton.classList.remove('visible');
+            }
+        };
+
+        scrollToTopButton.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
